@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Clase 1</title>
+  <script>
+    /***********************************************
+    *****************  Ejercicio 1 *****************
+    ***********************************************/
+    console.log('--------- EJERCICIO 1 --------')
+    var numero1 = 5;
+    var numero2 = 8;
+
+    if (numero1 <= numero2) {
+      console.log("numero1 no es mayor que numero2");
+    }
+
+    if (numero2 > 0) {
+      console.log("numero2 es positivo");
+    }
+
+    if (numero1 < 0) {
+      console.log("numero1 es negativo o distinto de cero");
+    }
+
+    if (numero1 + 1 < numero2) {
+      console.log("Incrementar en 1 unidad el valor de numero1 no lo hace mayor o igual que numero2");
+    }
+
+    /***********************************************
+    *****************  Ejercicio 2 *****************
+    ***********************************************/
+    console.log('--------- EJERCICIO 2 --------')
+    var array = [true, 5, false, "hola", "adios", 2];
+    
+    function getElementWithMaxLength(arr) {
+        return arr.reduce((prev, current) => {
+          return (String(current).length > String(prev).length)? current : prev;
+        })
+    }
+
+    console.log(getElementWithMaxLength(array));
+
+    function getFalsePosition(arr){
+      var pos = [];
+
+      for (let i in array) {
+        if (array[i] === false) 
+          pos.push(i);
+      }
+
+      return pos;
+    } 
+
+    console.log(getFalsePosition(array));
+
+    function executeOperation(arr, operation) {
+      switch(operation) {
+        case 'suma':
+          return arr[1] + arr[5];
+        case 'resta':
+          return arr[1] - arr[5];
+        case 'mult':
+          return arr[1] * arr[5];
+        case 'div':
+          return arr[1] / arr[5];
+        default:
+          return new Error('Invalid Argument');
+      }
+    }
+
+    console.log(executeOperation(array, 'suma'));
+
+    /***********************************************
+    *****************  Ejercicio 2 *****************
+    ***********************************************/
+    console.log('--------- EJERCICIO 3 --------')
+    var monthObj = {
+      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      showMonths: function() {
+        this.months.forEach((value) => {
+          console.log(value);
+        })},
+      getMonthNumber: function(index) {
+        try {
+          return this.months[index-1];
+        } catch(e) {
+          return new Error('Invalid index');
+        }
+      },
+      getMonthLetters: function() {
+        return this.months.map((m) => m.substr(0,2))
+      }
+    }
+
+    console.log(monthObj.months);
+    console.log(monthObj.showMonths());
+    console.log(monthObj.getMonthNumber(11));
+    console.log(monthObj.getMonthLetters());
+    
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

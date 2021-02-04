@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C+ApellidoNombre</title>
+    <script>
+        function Usuario(nombre, apellido, libros, mascotas) {
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.libros = libros;
+            this.mascotas = mascotas;
+
+            this.getFullName = function() {
+                return `${this.nombre} ${this.apellido}`;
+            }
+
+            this.addMascota = function(mascota) {
+                this.mascotas.push(mascota);
+            }
+
+            this.getMascotas = function() {
+                return this.mascotas.length;
+            }
+
+            this.addBook = function(book, author) {
+                console.log(typeof book)
+                if (!(typeof book === 'string' && typeof author === 'string'))
+                    return new Error('Invalid arguments');
+
+                let new_book = {
+                    book,
+                    author
+                };
+
+                this.libros.push(new_book);
+            }
+
+            this.getBooks = function() {
+                console.log(this.libros)
+                return this.libros.map(book => book.book);
+            }
+        }
+
+        /** --------------------------- **
+         ** ---------- Test ----------- **
+         ** --------------------------- **/
+
+         let user = new Usuario('Ignacio', 'Fernandez', [], []);
+         console.log(user)
+         console.log(user.getFullName());
+
+         console.log(user.addMascota('Munra'));
+         console.log(user.addMascota('Africa'));
+         console.log(user.getMascotas());
+
+         console.log(user.addBook('The Lord of the Rings', 'Tolkien'));
+         console.log(user.addBook('Song of Ice & Fire', 'George R. R. Martin'));
+         console.log(user.getBooks());
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
