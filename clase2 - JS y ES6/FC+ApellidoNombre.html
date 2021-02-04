@@ -24,7 +24,6 @@
             }
 
             this.addBook = function(book, author) {
-                console.log(typeof book)
                 if (!(typeof book === 'string' && typeof author === 'string'))
                     return new Error('Invalid arguments');
 
