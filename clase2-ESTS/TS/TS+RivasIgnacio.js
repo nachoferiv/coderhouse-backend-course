@@ -36,70 +36,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function operacion(num1, num2, op) {
     return __awaiter(this, void 0, void 0, function () {
-        var moduloSuma, moduloResta, funcionImportada;
         return __generator(this, function (_a) {
-            moduloSuma = './modules/suma.js';
-            moduloResta = './modules/resta.js';
-            if (op != 'suma' && op != 'resta')
-                return [2 /*return*/, 'Operacion invalida, solo se permite "suma" o "resta".'];
-            funcionImportada = op == 'suma' ?
-                Promise.resolve().then(function () { return require(moduloSuma); }).then(function (Suma) {
-                    var suma = new Suma(num1, num2);
-                    return suma.resultado();
-                }) :
-                Promise.resolve().then(function () { return require(moduloResta); }).then(function (Resta) {
-                    var resta = new Resta(num1, num2);
-                    return resta.resultado();
-                });
-            return [2 /*return*/, funcionImportada];
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    var moduloSuma = './modules/suma.js';
+                    var moduloResta = './modules/resta.js';
+                    if (op != 'suma' && op != 'resta') {
+                        reject('Operacion invalida, solo se permite "suma" o "resta".');
+                        return;
+                    }
+                    return op == 'suma' ?
+                        Promise.resolve().then(function () { return require(moduloSuma); }).then(function (Suma) {
+                            var suma = new Suma(num1, num2);
+                            resolve(suma.resultado());
+                        }) :
+                        Promise.resolve().then(function () { return require(moduloResta); }).then(function (Resta) {
+                            var resta = new Resta(num1, num2);
+                            resolve(resta.resultado());
+                        });
+                })];
         });
     });
 }
 function operaciones() {
-    return __awaiter(this, void 0, void 0, function () {
-        var casosDePrueba, _a, _b, _i, i, resultado;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    casosDePrueba = [{
-                            num1: 4,
-                            num2: 3,
-                            operacion: 'suma'
-                        },
-                        {
-                            num1: 2,
-                            num2: 8,
-                            operacion: 'resta'
-                        },
-                        {
-                            num1: 4,
-                            num2: 3,
-                            operacion: 'multiplicacion'
-                        },
-                        {
-                            num1: 23,
-                            num2: 3,
-                            operacion: 'resta'
-                        }];
-                    _a = [];
-                    for (_b in casosDePrueba)
-                        _a.push(_b);
-                    _i = 0;
-                    _c.label = 1;
-                case 1:
-                    if (!(_i < _a.length)) return [3 /*break*/, 4];
-                    i = _a[_i];
-                    return [4 /*yield*/, operacion(casosDePrueba[i].num1, casosDePrueba[i].num2, casosDePrueba[i].operacion)];
-                case 2:
-                    resultado = _c.sent();
-                    console.log(resultado);
-                    _c.label = 3;
-                case 3:
-                    _i++;
-                    return [3 /*break*/, 1];
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
+    var casosDePrueba = [{
+            num1: 4,
+            num2: 3,
+            operacion: 'suma'
+        },
+        {
+            num1: 2,
+            num2: 8,
+            operacion: 'resta'
+        },
+        {
+            num1: 4,
+            num2: 3,
+            operacion: 'multiplicacion'
+        },
+        {
+            num1: 23,
+            num2: 3,
+            operacion: 'resta'
+        }];
+    for (var i in casosDePrueba) {
+        var resultado = operacion(casosDePrueba[i].num1, casosDePrueba[i].num2, casosDePrueba[i].operacion);
+        resultado
+            .then(function (res) { return console.log(res); })["catch"](function (err) { return console.log(err); });
+    }
 }
 operaciones();
