@@ -1,18 +1,28 @@
-async function showWords(text, time, cb) {
+function showWords(text, cb, time = 1) {
   const words = text.split(' ');
   const wordsQuantity = words.length;
 
-  for(let i in words) {
-    setTimeout(() => {
-      console.log(words[i])
-      if (i == words.length-1)
+  for (let i in words) {
+    let extraTime = i == 0? 1 : +i+1;
+    setTimeout(() => {  
+      console.log(words[i]);
+      if (i == words.length -1)
         cb(wordsQuantity)
-    }, time * 1000)
+    }, (time * extraTime)  * 1000);
   }
 }
 
-const showFinishMessage = (wordsQuantity) => console.log(`Proceso completo. Cantidad de palabras: ${wordsQuantity}`) 
+const showFinishMessage = (wordsQuantity) => {
+  console.log(`END - Processed words: ${wordsQuantity}`);
+} 
 
-showWords('First Text', 10, showFinishMessage);
-showWords('This is the second text', 1, showFinishMessage);
-showWords('The last one', 3, showFinishMessage);
+showWords('First Text', totalWords => {
+  let words = totalWords;
+  showWords('This is the second text', totalWords => {
+    words += totalWords;
+    showWords('The last one', totalWords => {
+      words += totalWords;
+      showFinishMessage(words)
+    });
+  }, 2);
+}, 3);
