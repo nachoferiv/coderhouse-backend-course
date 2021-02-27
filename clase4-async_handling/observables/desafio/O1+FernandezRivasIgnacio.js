@@ -5,7 +5,7 @@ const input_reversed = document.querySelector("#input_1_reversed");
 
 function reverseValue() {
     return new Observable(suscriber => {
-        input.addEventListener("keyup", eventHandler);
+        input.addEventListener("keyup", eventHandler, true);
 
         function eventHandler (e) {
             reverseText(input, input_reversed);
@@ -22,7 +22,7 @@ function reverseValue() {
         return () => {
             input.value = "";
             input_reversed.value = "";
-            input.removeEventListener("keyup", eventHandler);
+            input.removeEventListener("keyup", eventHandler, true);
         }
     })
 }

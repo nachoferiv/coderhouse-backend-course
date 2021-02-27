@@ -9,10 +9,16 @@ const observableReverser = new Observable((suscriber) => {
     input.addEventListener("keyup", eventHandler);
 
     function eventHandler (e) {
-        if (input.value == "error")
+        if (input.value == "error") {
+            input.setAttribute("readonly", true);
             suscriber.error("Invalid input!");
-        if (input.value == "complete")
+        }
+            
+        if (input.value == "complete") {
+            input.setAttribute("readonly", true);
             suscriber.complete();
+        }
+
         suscriber.next(input.value);
     }
 
@@ -42,4 +48,4 @@ const subscriptor = observableReverser.subscribe({
 setTimeout(() => {
     subscriptor.unsubscribe();
     input.setAttribute("readonly", true);
-}, 3000)
+}, 30000)
